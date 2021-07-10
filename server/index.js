@@ -24,10 +24,29 @@ require('./db/index.js')(app)
 // const routes = require('./router/admin/index.js')
 // app.use('/', routes)
 //现在由于子路由是一个导出的函数,所以导出函数，运行函数并把express实例app当作参数传入
-require('./router/admin/index.js')(app)
-require('./router/admin/subcate.js')(app)
-require('./router/admin/item.js')(app)
-require('./router/admin/hero.js')(app)
+//传入校验中间件
+const authMiddleware = require('./middleware/auth.js');
+require('./router/admin/index.js')(app,authMiddleware);
+require('./router/admin/subcate.js')(app,authMiddleware);
+require('./router/admin/item.js')(app,authMiddleware);
+require('./router/admin/hero.js')(app,authMiddleware);
+require('./router/admin/article.js')(app,authMiddleware);
+require('./router/admin/user.js')(app,authMiddleware);
+require('./router/admin/ads.js')(app,authMiddleware);
+require('./router/admin/login.js')(app);
+
+
+//统一错误处理
+//捕获asset抛出的异常，集中错误处理，因为使用了http-assert返回的不是json格式的数据，需要转换
+app.use(async(err,req,res,next) =>{
+   //console.log(err) // 打印error
+   //console.log(err.statusCode) //422
+   //console.log(err.message)
+  //返回一个接送格式数据
+  res.status(err.statusCode || 500).send({
+     message:err.message
+  });
+})
 
 //#################### multer---图片上传
 const multer = require('multer');

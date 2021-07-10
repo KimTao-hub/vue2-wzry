@@ -7,7 +7,7 @@
              </el-form-item>
              <el-form-item label="装备类型："> 
                  <el-select v-model="model.cate">
-                     <el-option v-for="(item) in cates" 
+                     <el-option v-for="item in cates" 
                                 :label ="item.name" 
                                 :value="item._id" 
                                 :key="item._id">

@@ -51,7 +51,7 @@
             <el-menu-item-group>
               <template slot="title">广告位</template>
               <el-menu-item index="/ads/edit">新建广告位</el-menu-item>
-              <el-menu-item index="/edits/list">广告位列表</el-menu-item>
+              <el-menu-item index="/ads/list">广告位列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -59,13 +59,8 @@
       
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>修改密码</el-dropdown-item>
-              </el-dropdown-menu>
-          </el-dropdown>
-          <span>王小虎</span>
+          <span class="username">{{name}},欢迎你！</span>
+          <button type="primary" @click="exit">退出</button>
         </el-header>
 
         <el-main>
@@ -87,13 +82,22 @@
   .el-aside {
       color: #333;
   }
+  .username{
+    font-size: 16px;
+  }
 </style>
 
 <script>
   export default {
     data() {
       return {
-        
+         name:sessionStorage.name,
+      }
+    },
+    methods:{
+      exit(){
+        sessionStorage.clear();
+        this.$router.push('/login');
       }
     }
   };

@@ -156,7 +156,7 @@
       width: 100%;
   }
   .skillForm{
-      border-bottom: 5px solid #ccc;
+      border-bottom: 1px solid #ccc;
   }
   .btn{
       margin-top: 20px;

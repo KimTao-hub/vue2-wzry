@@ -5,10 +5,10 @@
            <el-form label-width="120px">
                 <el-form-item label="父级分类:">
                     <el-select v-model="model.parent" placeholder="请选择父级分类">
-                        <el-option v-for="(item,index) in parents" 
+                        <el-option v-for="item in parents" 
                                 :label ="item.name" 
                                 :value="item._id" 
-                                :key="index">
+                                :key="item._id">
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -54,6 +54,8 @@ export default {
                         type:'success',
                     })
                     this.$router.push('/subcate/list');
+                }else{
+                    this.$message.error('新增失败');
                 }
             }else{
                const res =  await this.$http.put(`/subcate/${this.id}`,this.model)
@@ -65,6 +67,8 @@ export default {
                    });
                    this.$router.push('/subcate/list');
 
+               }else{
+                   this.$message.error('编辑失败');
                }
             }
            
